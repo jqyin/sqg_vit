@@ -2,22 +2,22 @@ seed_everything: 42
 
 # ---------------------------- TRAINER -------------------------------------------
 trainer:
-  default_root_dir: ${oc.env:OUTPUT_DIR,/home/t-tungnguyen/ClimaX/exps/global_forecast_climax}
+  default_root_dir: ${oc.env:OUTPUT_DIR,/lustre/orion/scratch/junqi/stf218/frontier/climax/runs/global_forecast}
 
   precision: 16
 
-  gpus: null
-  num_nodes: 1
+#  gpus: null
+  num_nodes: null
   accelerator: gpu
   strategy: ddp
 
-  min_epochs: 1
+  min_epochs: 10
   max_epochs: 100
   enable_progress_bar: true
 
   sync_batchnorm: True
   enable_checkpointing: True
-  resume_from_checkpoint: null
+#  resume_from_checkpoint: null
 
   # debugging
   fast_dev_run: false
@@ -40,7 +40,7 @@ trainer:
     - class_path: pytorch_lightning.callbacks.ModelCheckpoint
       init_args:
         dirpath: "${trainer.default_root_dir}/checkpoints"
-        monitor: "val/w_rmse" # name of the logged metric which determines when model is improving
+        monitor: "train/loss" #"val/w_rmse" # name of the logged metric which determines when model is improving
         mode: "min" # "max" means higher metric value is better, can be also "min"
         save_top_k: 1 # save k best models (determined by above metric)
         save_last: True # additionaly always save model from last epoch
@@ -50,7 +50,7 @@ trainer:
 
     - class_path: pytorch_lightning.callbacks.EarlyStopping
       init_args:
-        monitor: "val/w_rmse" # name of the logged metric which determines when model is improving
+        monitor: "train/loss" #"val/w_rmse" # name of the logged metric which determines when model is improving
         mode: "min" # "max" means higher metric value is better, can be also "min"
         patience: 5 # how many validation epochs of not improving until training stops
         min_delta: 0. # minimum change in the monitored metric needed to qualify as an improvement
@@ -59,7 +59,7 @@ trainer:
       init_args:
         max_depth: -1
 
-    - class_path: pytorch_lightning.callbacks.RichProgressBar
+#    - class_path: pytorch_lightning.callbacks.RichProgressBar
 
 # ---------------------------- MODEL -------------------------------------------
 model:
@@ -194,5 +194,5 @@ data:
   hrs_each_step: 1
   buffer_size: 10000
   batch_size: 128
-  num_workers: 1
+  num_workers: 7
   pin_memory: False
