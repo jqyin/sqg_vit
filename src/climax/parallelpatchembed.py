@@ -2,7 +2,8 @@ import math
 
 import torch
 import torch.nn.functional as F
-from timm.models.layers.helpers import to_2tuple
+from timm.layers.helpers import to_2tuple
+#from timm.models.layers.helpers import to_2tuple
 from torch import nn
 
 

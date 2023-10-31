@@ -91,7 +91,7 @@ class ClimaX(nn.Module):
                     qkv_bias=True,
                     drop_path=dpr[i],
                     norm_layer=nn.LayerNorm,
-                    drop=drop_rate,
+                    proj_drop=drop_rate,
                 )
                 for i in range(depth)
             ]
