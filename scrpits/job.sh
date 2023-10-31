@@ -11,9 +11,10 @@
 
 source env.sh
 
+DIST=deepspeed
 
 CMD="python ../src/climax/global_forecast/train.py --config configs/global_forecast_climax.yaml \
-    --trainer.strategy=ddp --trainer.devices=8 --trainer.num_nodes=$SLURM_NNODES \
+    --trainer.strategy=$DIST --trainer.devices=8 --trainer.num_nodes=$SLURM_NNODES \
     --trainer.max_epochs=10 \
     --data.root_dir=/lustre/orion/proj-shared/gen150/junqi/data/5.625deg_npz \
     --data.predict_range=72 --data.out_variables=['geopotential_500','temperature_850','2m_temperature'] \
