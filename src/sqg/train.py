@@ -3,8 +3,8 @@
 
 import os
 import time,torch
-from .datamodule import PLDataModule
-from .module import PLModule
+from datamodule import PLDataModule
+from module import PLModule
 from pytorch_lightning.cli import LightningCLI
 
 def main():

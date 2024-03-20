@@ -10,8 +10,9 @@ from torchvision.transforms import transforms
 from deepspeed.profiling.flops_profiler import FlopsProfiler
 
 from sqg.model.arch import SQG_ViT
-from .lr_scheduler import LinearWarmupCosineAnnealingLR
-from .metrics import (
+from lr_scheduler import LinearWarmupCosineAnnealingLR
+from metrics import (
+    mse,
     lat_weighted_acc,
     lat_weighted_mse,
     lat_weighted_mse_val,
@@ -125,7 +126,7 @@ class PLModule(LightningModule):
             flops = self.flop*3/spi/10**12 
             print(f"Training performance: {flops}TFLOPS")
 
-        loss_dict, _ = self.net.forward(x, y, lead_times, variables, out_variables, [lat_weighted_mse], lat=self.lat)
+        loss_dict, _ = self.net.forward(x, y, lead_times, variables, out_variables, [mse], lat=self.lat)
 
         if batch_idx == self.prof_step and self.global_rank == 0:
             self.prof.stop_profile()
@@ -163,6 +164,7 @@ class PLModule(LightningModule):
             out_variables,
             transform=self.denormalization,
             metrics=[lat_weighted_mse_val, lat_weighted_rmse, lat_weighted_acc],
+            #metrics=[mse],
             lat=self.lat,
             clim=self.val_clim,
             log_postfix=log_postfix,

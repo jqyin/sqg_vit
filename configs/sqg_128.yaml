@@ -81,19 +81,19 @@ model:
           "sqg_0",
           "sqg_10000",
         ]
-      img_size: [256, 256]
+      img_size: [128, 128]
       patch_size: 4
       embed_dim: 2048
-      depth: 48
+      depth: 24
       decoder_depth: 2
-      num_heads: 8
+      num_heads: 16
       mlp_ratio: 4
       drop_path: 0.1
       drop_rate: 0.1
 
 # ---------------------------- DATA -------------------------------------------
 data:
-  root_dir: /lustre/orion/gen150/world-shared/siyan/climax_sqg/sqg_256_npy_2hr_per_file
+  root_dir: ../sqg_npy/128
   variables: [
           "sqg_0",
           "sqg_10000",
