@@ -1,0 +1,21 @@
+#!/bin/bash -l
+#SBATCH -J ensf
+#SBATCH -t 0:30:00
+#SBATCH -A stf218
+#SBATCH -N 1
+#SBATCH -C nvme
+#SBATCH -q debug
+#SBATCH --exclusive
+#SBATCH --ntasks-per-node=8
+#SBATCH -o o.infer.%j
+#SBATCH -e e.infer.%j
+
+source env.sh
+
+NUM_RANKS=`expr ${SLURM_NNODES} \* ${SLURM_NTASKS_PER_NODE}`
+NUM_RANKS_PER_NODE=${SLURM_NTASKS_PER_NODE}
+
+CMD="python -u run_ensf.py"
+
+HOME=/tmp time srun --nodes=${SLURM_NNODES} --ntasks=${NUM_RANKS} --ntasks-per-node=${NUM_RANKS_PER_NODE} -c7 --gpus-per-node=8 --gpu-bind=closest bash -c "rocm-smi &> /dev/null; ${CMD}"
+
