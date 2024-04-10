@@ -51,7 +51,7 @@ srun --nodes=${SLURM_NNODES} \
                $CMD
 ```
 ### Distributed training 
-A [job script](./scrpits/job.sh) is provided for scaling study on Frontier. The `DIST` backend can be changed to `ddp`, `deepspeed`, and `fsdp`. For DeepSpeed, tuning knobs are exposed via the [configuration file](./configs/ds_config.yaml), e.g., 
+A [job script](./scripts/job.sh) is provided for scaling study on Frontier. The `DIST` backend can be changed to `ddp`, `deepspeed`, and `fsdp`. For DeepSpeed, tuning knobs are exposed via the [configuration file](./configs/ds_config.yaml), e.g., 
 ```bash
     "allgather_partitions": true,
     "allgather_bucket_size": 500000000,
