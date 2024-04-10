@@ -51,7 +51,18 @@ srun --nodes=${SLURM_NNODES} \
                $CMD
 ```
 ### Distributed training 
+A [job script](./scrpits/job.sh) is provided for scaling study on Frontier. The `DIST` backend can be changed to `ddp`, `deepspeed`, and `fsdp`. For DeepSpeed, tuning knobs are exposed via the [configuration file](./configs/ds_config.yaml), e.g., 
+```bash
+    "allgather_partitions": true,
+    "allgather_bucket_size": 500000000,
+    "overlap_comm": true,
+    "reduce_scatter": false,
+    "reduce_bucket_size": 500000000,
+    "contiguous_gradients": true
+```
+For FSDP, the sharding strategies can be changed to `FULL_SHARD`, `SHARD_GRAD_OP`, or `HYBRID_SHARD`. 
 
+The model architecturs for each input sizes (64x64, 128x128, 256x256) are defined in [configs](./configs). 
 
 ## Coupled experiments
 
