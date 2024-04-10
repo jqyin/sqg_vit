@@ -1,11 +1,8 @@
-ROOT=/lustre/orion/world-shared/stf218/junqi/miniconda
-export PATH=${ROOT}/bin:$PATH
-source ${ROOT}/etc/profile.d/conda.sh
-WORKDIR=$(pwd)
-conda activate /lustre/orion/world-shared/stf218/junqi/miniconda/envs/climax-env
+module load rocm/5.7.0
+BUILD=/lustre/orion/scratch/junqi/stf218/zero++/miniconda
+export PATH=${BUILD}/bin:$PATH
+source ${BUILD}/etc/profile.d/conda.sh
 
-export LD_LIBRARY_PATH=${ROOT}/lib:${ROOT}/../rccl-plugin-rocm540/lib:$LD_LIBRARY_PATH
-export PYTHONPATH=$WORKDIR/ClimaX/src:$PYTHONPATH
- 
-
-
+conda activate /lustre/orion/scratch/junqi/stf218/zero++/miniconda/envs/zero+-env
+export PYTHONPATH=/lustre/orion/scratch/junqi/stf218/climax_sqg/sqg_vit/src:$PYTHONPATH
+export LD_LIBRARY_PATH=/lustre/orion/scratch/junqi/stf218/pyt-nightly-rocm5.7/rccl-plugin-rocm570/lib:$LD_LIBRARY_PATH

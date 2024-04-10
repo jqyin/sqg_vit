@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH -J test
+#SBATCH -J sqg-vit
 #SBATCH -N 4
 #SBATCH -t 2:00:00
 #SBATCH -A stf218
@@ -7,20 +7,25 @@
 #SBATCH -q debug 
 #SBATCH --exclusive
 #SBATCH --ntasks-per-node=8
-#SBATCH -o tft.o%j
+#SBATCH -o log.o%j
 
 source env.sh
 
 DIST=deepspeed
+SIZE=256
+DATA=/mnt/bb/$USER/sqg_256_npy_2hr_per_file
 
-CMD="python ../src/climax/global_forecast/train.py --config configs/global_forecast_climax.yaml \
+export PL_DEEPSPEED_CONFIG_PATH=../configs/ds_config.yaml
+
+CMD="PL_DEEPSPEED_CONFIG_PATH=../configs/ds_config.yaml \
+    python ../src/sqg/train.py --config ../configs/sqg_${SIZE}.yaml  \
     --trainer.strategy=$DIST --trainer.devices=8 --trainer.num_nodes=$SLURM_NNODES \
     --trainer.max_epochs=10 \
-    --data.root_dir=/lustre/orion/proj-shared/gen150/junqi/data/5.625deg_npz \
-    --data.predict_range=72 --data.out_variables=['geopotential_500','temperature_850','2m_temperature'] \
-    --data.batch_size=16 \
-    --model.pretrained_path=../models/5.625deg.ckpt \
-    --model.lr=5e-7 --model.beta_1="0.9" --model.beta_2="0.99" \
+    --data.root_dir=$DATA \
+    --data.predict_range=1 \
+    --data.batch_size=4 \
+    --model.pretrained_path= \
+    --model.lr=1e-6 --model.beta_1="0.9" --model.beta_2="0.99" \
     --model.weight_decay=1e-5
 "
 
@@ -31,5 +36,5 @@ HOME=/tmp time srun --nodes=${SLURM_NNODES} \
                --ntasks-per-node=8 \
                --gpu-bind=closest \
                -c7 \
-               bash -c "source setup_ddp.sh; $CMD"
+               bash -c "source setup_dist.sh; $CMD"
 
