@@ -197,3 +197,14 @@ class PLDataModule(LightningDataModule):
             pin_memory=self.hparams.pin_memory,
             collate_fn=collate_fn,
         )
+
+    def predict_dataloader(self):
+        return DataLoader(
+            self.data_test,
+            batch_size=self.hparams.batch_size,
+            shuffle=False,
+            drop_last=False,
+            num_workers=self.hparams.num_workers,
+            pin_memory=self.hparams.pin_memory,
+            collate_fn=collate_fn,
+        )
