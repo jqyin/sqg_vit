@@ -76,5 +76,10 @@ sh ./coupled_vit_ensf/run_vit.sh
 sh ./coupled_vit_ensf/run_coupled_ensf_vit.sh
 ```
 
+Note, before running the experiments, the trained ViT model need to be downloaded by the [download script](./vit_model_download_script)
+```bash
+sh ./coupled_vit_ensf/vit_model_download.sh
+```
+
 ## Results
 The plots of the results are generated using this [script](./plot.ipynb), and the corresponding raw job logs can be [downloaded](https://www.dropbox.com/scl/fo/yq9q60k8sjb2pknwij46t/AAXIzGohoFnCQ419YyXD6zI?rlkey=c2544bxgblrcezmycp8qtsfco&dl=0).  
