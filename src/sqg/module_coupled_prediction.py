@@ -479,6 +479,8 @@ class PLModule(LightningModule):
                     if self.bool_add_jump_noise:
                         if (batch_idx == self.jump).any():
                             self.pvob[k] = self.scalefact * (self.pv_truth[batch_idx, k, :, :].ravel()[indxob] + jumpnoise_reshape[k])
+                        else:
+                            self.pvob[k] = self.scalefact * self.pv_truth[batch_idx, k, :, :].ravel()[indxob]
                     else:
                         self.pvob[k] = self.scalefact * self.pv_truth[batch_idx, k, :, :].ravel()[indxob]      
                     self.pvob[k] += self.rsobs.normal(scale=self.obserrstdev, size=self.nobs)
