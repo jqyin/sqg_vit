@@ -65,6 +65,9 @@ For FSDP, the sharding strategies can be changed to `FULL_SHARD`, `SHARD_GRAD_OP
 The model architecturs for each input sizes (64x64, 128x128, 256x256) are defined in [configs](./configs). 
 
 ## Coupled experiments
+We incorporated the EnSF method with a trained ViT model for coupled auto-regressive prediction tests on 64x64 image size. Two sets of experiment scripts are provided for:
+1. Pure ViT auto-regressive predictions without EnSF coupled, Note we still use EnSF ensembles to initialize the 'step zero' ONLY for a fair comparison. You can check this [job script](./coupled_vit_ensf/run_vit.sh).
+2. Coupled ViT-EnSF auto-regressive prediction tests. EnSF calibrates and updates the initial conditions of the ViT predictions at the current step using observations to improve the ViT predictions for the next step. Note we have the option in the running script to add additional 'jump noises'. You can check this [job script](./coupled_vit_ensf/run_coupled_ensf_vit.sh).
 
 ## Results
 The plots of the results are generated using this [script](./plot.ipynb), and the corresponding raw job logs can be [downloaded](https://www.dropbox.com/scl/fo/yq9q60k8sjb2pknwij46t/AAXIzGohoFnCQ419YyXD6zI?rlkey=c2544bxgblrcezmycp8qtsfco&dl=0).  
