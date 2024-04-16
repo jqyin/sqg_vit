@@ -15,7 +15,7 @@ CMD="python ./src/sqg/coupled_prediction.py --config ./configs/sqg_64_coupled.ya
     --model.pretrained_path=./coupled_vit_ensf/vit_model/last-v1.ckpt \
     --model.observation_path=./coupled_vit_ensf/sqg_N64_12hrly.nc \
     --model.coupled_prediction_output_path=./coupled_vit_ensf/coupled_results \
-    --model.add_jump_noises=True \
+    --model.add_jump_noises=False \
     --model.lr=1e-4 \
     --model.beta_1="0.9" --model.beta_2="0.99" \
     --model.weight_decay=1e-5
