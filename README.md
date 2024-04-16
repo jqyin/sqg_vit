@@ -76,7 +76,7 @@ sh ./coupled_vit_ensf/run_vit.sh
 sh ./coupled_vit_ensf/run_coupled_ensf_vit.sh
 ```
 
-Note, before running the experiments, the trained ViT model need to be downloaded by the [download script](./vit_model_download_script)
+Note: before running the experiments, the trained ViT model needs to be downloaded by the [download script](./coupled_vit_ensf/vit_model_download.sh)
 ```bash
 sh ./coupled_vit_ensf/vit_model_download.sh
 ```
