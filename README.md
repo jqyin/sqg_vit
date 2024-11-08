@@ -1,5 +1,5 @@
 # A Scalable Real-Time Data Assimilation Framework for Predicting Turbulent Atmosphere Dynamics
-This repository contains the scalable implementation of our generic real-time data assimilation (DA) framwork for estimating turbulent dynamics, consisting of ensemble score filter (EnSF), vision Transformer (ViT) surrogate, and coupled experiments.    
+This repository contains the scalable implementation of our generic real-time data assimilation (DA) framwork for estimating turbulent dynamics, consisting of ensemble score filter (EnSF), vision Transformer (ViT) surrogate (based on [climaX](https://github.com/microsoft/ClimaX)), and coupled experiments.    
 <img src="./workflow.png" width="500">
 
 ## Contributions
@@ -22,7 +22,7 @@ A [job script](./ensf/job.sb) is provided for the scaling study on Frontier.
 We show the scaling of ViT surrogate for [surface quasi-geostrophic (SQG)](https://github.com/jswhit/sqgturb) in following steps. 
 
 ### Data generation
-We generate the SQG data using this [repo](https://github.com/jswhit/sqgturb).
+We generate the SQG data using this [repo](https://github.com/jswhit/sqgturb), and dataset for training ViT surrogate for the coupled experiment can be [downloaded](https://www.dropbox.com/scl/fi/ws7evw7qivvdbsju7387t/sqg_64_v3_12hrly.nc?rlkey=o3rbhhx88wrotcgmvdi1v5kt8&dl=0).
 
 ### Data preprocesssing
 We pre-process the SQG data as follows,
