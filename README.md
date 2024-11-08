@@ -83,3 +83,16 @@ sh ./coupled_vit_ensf/vit_model_download.sh
 
 ## Results
 The plots of the results are generated using this [script](./plot.ipynb), and the corresponding raw job logs can be [downloaded](https://www.dropbox.com/scl/fo/yq9q60k8sjb2pknwij46t/AAXIzGohoFnCQ419YyXD6zI?rlkey=c2544bxgblrcezmycp8qtsfco&dl=0).  
+
+## Reference
+```text
+@misc{yin2024scalablerealtimedataassimilation,
+      title={A Scalable Real-Time Data Assimilation Framework for Predicting Turbulent Atmosphere Dynamics}, 
+      author={Junqi Yin and Siming Liang and Siyan Liu and Feng Bao and Hristo G. Chipilski and Dan Lu and Guannan Zhang},
+      year={2024},
+      eprint={2407.12168},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2407.12168}, 
+}
+```
